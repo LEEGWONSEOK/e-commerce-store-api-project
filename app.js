@@ -1,16 +1,28 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const { sequelize } = require('./api/models');
+const { sequelize } = require('./src/models');
 
 dotenv.config();
 const app = express();
 
 app.set('port', process.env.SERVER_PORT || 8080);
 
+// DB 연결
+sequelize.sync({ force: true })
+  .then(() => {
+    console.log('◆ DB Connect!');
+  })
+  .catch(e => {
+    console.log(e);
+  });
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Router
+//app.use('/api', apiRouter);
 
 // 404 Handler
 app.use('*', (req, res, next) => {
