@@ -2,6 +2,14 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const { sequelize } = require('./src/models');
+const accountRouter = require('./src/routes/accounts');
+const addressRouter = require('./src/routes/addresses');
+const cartRouter = require('./src/routes/carts');
+const eventRouter = require('./src/routes/events');
+const paymentRouter = require('./src/routes/payments');
+const productRouter = require('./src/routes/products');
+
+
 
 dotenv.config();
 const app = express();
