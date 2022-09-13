@@ -9,10 +9,20 @@ module.exports = class Product extends Sequelize.Model {
         allowNull: false,
         comment: '상품 이름',
       },
+      origin: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        comment: '상품 원산지',
+      },
       price: {
         type: Sequelize.INTEGER,
         allowNull: false,
         comment: '상품 가격',
+      },
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        comment: '상품 개수',
       },
       discountRate: {
         type: Sequelize.INTEGER,
@@ -49,14 +59,19 @@ module.exports = class Product extends Sequelize.Model {
   }
 
   static associate(db) {
-    // // User : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.User, {
-    //   foreignKey: 'userId'
-    // });
-    
-    // // Recruit : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.Recruit, {
-    //   foreignKey: 'recruitId'
-    // });
+    // Account : Product = 1 : N
+    db.Product.belongsTo(db.Account, {
+      foreignKey: 'account_id'
+    });
+
+    // Product : Cart = 1 : N
+    db.Product.hasMany(db.Cart, {
+      foreignKey: 'product_id'
+    });
+
+    // Event : Product = 1 : N
+    db.Product.belongsTo(db.Event, {
+      foreignKey: 'event_id'
+    });
   }
 }

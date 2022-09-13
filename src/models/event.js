@@ -28,14 +28,9 @@ module.exports = class Event extends Sequelize.Model {
   }
 
   static associate(db) {
-    // // User : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.User, {
-    //   foreignKey: 'userId'
-    // });
-    
-    // // Recruit : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.Recruit, {
-    //   foreignKey: 'recruitId'
-    // });
+    // Event : Product = 1 : N
+    db.Event.hasMany(db.Product, {
+      foreignKey: 'event_id'
+    });
   }
 }

@@ -33,14 +33,14 @@ module.exports = class Address extends Sequelize.Model {
   }
 
   static associate(db) {
-    // // User : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.User, {
-    //   foreignKey: 'userId'
-    // });
-    
-    // // Recruit : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.Recruit, {
-    //   foreignKey: 'recruitId'
-    // });
+    // Account : Address = 1 : N
+    db.Address.belongsTo(db.Account, {
+      foreignKey: 'account_id'
+    });
+
+    // Payment는 Address를 참조한다
+    db.Address.hasMany(db.Payment, {
+      foreignKey: 'address_id'
+    });
   }
 }

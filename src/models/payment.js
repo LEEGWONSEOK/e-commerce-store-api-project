@@ -34,14 +34,9 @@ module.exports = class Payment extends Sequelize.Model {
   }
 
   static associate(db) {
-    // // User : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.User, {
-    //   foreignKey: 'userId'
-    // });
-    
-    // // Recruit : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.Recruit, {
-    //   foreignKey: 'recruitId'
-    // });
+    // Payment는 Address를 참조한다
+    db.Payment.belongsTo(db.Address, {
+      foreignKey: 'address_id'
+    });
   }
 }

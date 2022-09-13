@@ -28,9 +28,9 @@ module.exports = class Account extends Sequelize.Model {
         comment: '암호 알고리즘',
       },
       accountType: {
-        type: Sequelize.ENUM('customer', 'seller', 'admin'),
+        type: Sequelize.ENUM('user', 'admin'),
         allowNull: false,
-        comment: '계정 타입',
+        comment: '계정 타입(고객, 관리자)',
       },
       createAt: {
         type: Sequelize.DATE,
@@ -51,7 +51,23 @@ module.exports = class Account extends Sequelize.Model {
   }
 
   static associate(db) {
-    // // User : Applyment = 1 : N
+    // Account : Address = 1 : N
+    db.Account.hasMany(db.Address, {
+      foreignKey: 'account_id'
+    });
+
+    // Account : Product = 1 : N
+    db.Account.hasMany(db.Product, {
+      foreignKey: 'account_id'
+    });
+
+    // Account : Cart = 1 : N
+    db.Account.hasMany(db.Cart, {
+      foreignKey: 'account_id'
+    });
+
+    
+    // // Account TB : Address TB = 1 : N
     // db.Applyment.belongsTo(db.User, {
     //   foreignKey: 'userId'
     // });

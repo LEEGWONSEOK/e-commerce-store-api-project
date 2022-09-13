@@ -34,14 +34,14 @@ module.exports = class Cart extends Sequelize.Model {
   }
 
   static associate(db) {
-    // // User : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.User, {
-    //   foreignKey: 'userId'
-    // });
+    // Account : Cart = 1 : N
+    db.Cart.belongsTo(db.Account, {
+      foreignKey: 'account_id'
+    });
     
-    // // Recruit : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.Recruit, {
-    //   foreignKey: 'recruitId'
-    // });
+    // Product : Cart = 1 : N
+    db.Cart.belongsTo(db.Product, {
+      foreignKey: 'product_id'
+    });
   }
 }
