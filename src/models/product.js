@@ -40,6 +40,11 @@ module.exports = class Product extends Sequelize.Model {
         allowNull: false,
         comment: '상품 이미지',
       },
+      event: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        comment: '상품 이벤트',
+      },
       createAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -69,9 +74,9 @@ module.exports = class Product extends Sequelize.Model {
       foreignKey: 'product_id'
     });
 
-    // Event : Product = 1 : N
-    db.Product.belongsTo(db.Event, {
-      foreignKey: 'event_id'
-    });
+    // // Event : Product = 1 : N
+    // db.Product.belongsTo(db.Event, {
+    //   foreignKey: 'event_id'
+    // });
   }
 }
