@@ -9,7 +9,7 @@ const session = require('express-session');
 
 const { sequelize } = require('./src/models');
 // const accountRouter = require('./src/routes/accounts');
-// const addressRouter = require('./src/routes/addresses');
+const addressRouter = require('./src/routes/addresses');
 // const cartRouter = require('./src/routes/carts');
 // const paymentRouter = require('./src/routes/payments');
 const productRouter = require('./src/routes/products');
@@ -49,6 +49,7 @@ app.use(session({
 
 // Router
 app.use('/api/products', productRouter);
+app.use('/api/users/:userId/addresses', addressRouter);
 
 // 404 Handler
 app.use('*', (req, res, next) => {

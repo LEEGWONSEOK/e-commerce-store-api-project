@@ -1,7 +1,7 @@
-// Account TB
+// Customer TB
 const Sequelize = require('sequelize');
 
-module.exports = class Account extends Sequelize.Model {
+module.exports = class Customer extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       email: {
@@ -27,11 +27,6 @@ module.exports = class Account extends Sequelize.Model {
         defaultValue: 'customer',
         comment: '암호 알고리즘',
       },
-      accountType: {
-        type: Sequelize.ENUM('user', 'admin'),
-        allowNull: false,
-        comment: '계정 타입(고객, 관리자)',
-      },
       createAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -42,8 +37,8 @@ module.exports = class Account extends Sequelize.Model {
       sequelize,
       timestamps: false,
       underscored: true,
-      modelName: 'Account',
-      tableName: 'accounts',
+      modelName: 'Customer',
+      tableName: 'customers',
       paranoid: false,
       charset: 'utf8',
       collate: "utf8_general_ci"
@@ -51,30 +46,14 @@ module.exports = class Account extends Sequelize.Model {
   }
 
   static associate(db) {
-    // Account : Address = 1 : N
-    db.Account.hasMany(db.Address, {
-      foreignKey: 'account_id'
+    // Customer : Address = 1 : N
+    db.Customer.hasMany(db.Address, {
+      foreignKey: 'customer_id'
     });
-
-    // Account : Product = 1 : N
-    db.Account.hasMany(db.Product, {
-      foreignKey: 'account_id'
-    });
-
-    // Account : Cart = 1 : N
-    db.Account.hasMany(db.Cart, {
-      foreignKey: 'account_id'
-    });
-
     
-    // // Account TB : Address TB = 1 : N
-    // db.Applyment.belongsTo(db.User, {
-    //   foreignKey: 'userId'
-    // });
-    
-    // // Recruit : Applyment = 1 : N
-    // db.Applyment.belongsTo(db.Recruit, {
-    //   foreignKey: 'recruitId'
-    // });
+    // Customer : Cart = 1 : N
+    db.Customer.hasMany(db.Cart, {
+      foreignKey: 'customer_id'
+    });
   }
 }

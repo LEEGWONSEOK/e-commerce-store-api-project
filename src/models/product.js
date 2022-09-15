@@ -64,19 +64,14 @@ module.exports = class Product extends Sequelize.Model {
   }
 
   static associate(db) {
-    // Account : Product = 1 : N
-    db.Product.belongsTo(db.Account, {
-      foreignKey: 'account_id'
+    // Admin : Product = 1 : N
+    db.Product.belongsTo(db.Admin, {
+      foreignKey: 'admin_id'
     });
 
     // Product : Cart = 1 : N
     db.Product.hasMany(db.Cart, {
       foreignKey: 'product_id'
     });
-
-    // // Event : Product = 1 : N
-    // db.Product.belongsTo(db.Event, {
-    //   foreignKey: 'event_id'
-    // });
   }
 }
